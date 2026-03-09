@@ -3,6 +3,7 @@ package app;
 import java.util.Scanner;
 import model.User;
 import repository.UserRepository;
+import service.ReportService;
 import model.Income;
 import repository.IncomeRepository;
 import model.Expense;
@@ -134,7 +135,18 @@ public class Main {
                     break;
 
                 case 3:
-                    System.out.println("Report feature coming next...");
+                    ReportService report = new ReportService(user.getId());
+                    double totalIncome = report.getTotalIncome();
+                    double totalExpenses = report.getTotalExpenses();
+                    double balance = totalIncome - totalExpenses;
+
+                    System.out.println("\n===== Monthly Report =====");
+                    System.out.println("Total Income: " + totalIncome);
+                    System.out.println("Total Expenses: " + totalExpenses);
+                    System.out.println("Remaining Balance: " + balance);
+
+                    report.printCategoryExpenses();
+
                     break;
 
                 case 4:
