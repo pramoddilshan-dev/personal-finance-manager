@@ -6,6 +6,8 @@ import model.Category;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CategoryRepository {
 
@@ -46,5 +48,36 @@ public class CategoryRepository {
         }
 
         return -1; // Not found
+    }
+
+    public List<Category> getCategoriesByType(String type) {
+
+        List<Category> categories = new ArrayList<>();
+
+        String sql = "SELECT * FROM categories WHERE type = ?";
+
+        try (Connection conn = DBConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, type);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                Category category = new Category();
+
+                category.setId(rs.getInt("id"));
+                category.setName(rs.getString("name"));
+                category.setType(rs.getString("type"));
+
+                categories.add(category);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return categories;
     }
 }

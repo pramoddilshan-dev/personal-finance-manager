@@ -5,6 +5,9 @@ import model.Income;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class IncomeRepository {
 
@@ -27,6 +30,75 @@ public class IncomeRepository {
         } catch (Exception e) {
             e.printStackTrace();
             return false;
+        }
+    }
+
+    public List<Income> getIncomeByUser(int userId) {
+
+        List<Income> incomes = new ArrayList<>();
+
+        String sql = "SELECT * FROM income WHERE user_id = ?";
+
+        try (Connection conn = DBConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, userId);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                Income income = new Income();
+
+                income.setId(rs.getInt("id"));
+                income.setUserId(rs.getInt("user_id"));
+                income.setCategoryId(rs.getInt("category_id"));
+                income.setAmount(rs.getDouble("amount"));
+                income.setDate(rs.getDate("date").toLocalDate());
+                income.setNote(rs.getString("note"));
+
+                incomes.add(income);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return incomes;
+    }
+
+    public void printIncomeTransactions(int userId) {
+
+        String sql =
+                "SELECT i.date, c.name AS category, i.amount, i.note " +
+                "FROM income i " +
+                "JOIN categories c ON i.category_id = c.id " +
+                "WHERE i.user_id = ?";
+
+        try (Connection conn = DBConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, userId);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                String date = rs.getDate("date").toString();
+                String category = rs.getString("category");
+                double amount = rs.getDouble("amount");
+                String note = rs.getString("note");
+
+                System.out.printf("%-12s %-10s %-12s %-10.2f %-15s\n",
+                        date,
+                        "Income",
+                        category,
+                        amount,
+                        note);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
