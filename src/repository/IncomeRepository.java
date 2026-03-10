@@ -40,7 +40,7 @@ public class IncomeRepository {
         String sql = "SELECT * FROM income WHERE user_id = ?";
 
         try (Connection conn = DBConnection.getConnection();
-            PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, userId);
 
@@ -67,16 +67,43 @@ public class IncomeRepository {
         return incomes;
     }
 
+    /**
+     * NEW METHOD
+     * Get total income of a user
+     */
+    public double getTotalIncome(int userId) {
+
+        String sql = "SELECT SUM(amount) AS total FROM income WHERE user_id = ?";
+        double total = 0;
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, userId);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                total = rs.getDouble("total");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return total;
+    }
+
     public void printIncomeTransactions(int userId) {
 
         String sql =
                 "SELECT i.date, c.name AS category, i.amount, i.note " +
-                "FROM income i " +
-                "JOIN categories c ON i.category_id = c.id " +
-                "WHERE i.user_id = ?";
+                        "FROM income i " +
+                        "JOIN categories c ON i.category_id = c.id " +
+                        "WHERE i.user_id = ?";
 
         try (Connection conn = DBConnection.getConnection();
-            PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, userId);
 

@@ -40,7 +40,7 @@ public class ExpenseRepository {
         String sql = "SELECT * FROM expenses WHERE user_id = ?";
 
         try (Connection conn = DBConnection.getConnection();
-            PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, userId);
 
@@ -67,16 +67,43 @@ public class ExpenseRepository {
         return expenses;
     }
 
+    /**
+     * NEW METHOD
+     * Get total expenses of a user
+     */
+    public double getTotalExpenses(int userId) {
+
+        String sql = "SELECT SUM(amount) AS total FROM expenses WHERE user_id = ?";
+        double total = 0;
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, userId);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                total = rs.getDouble("total");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return total;
+    }
+
     public void printExpenseTransactions(int userId) {
 
         String sql =
                 "SELECT e.date, c.name AS category, e.amount, e.note " +
-                "FROM expenses e " +
-                "JOIN categories c ON e.category_id = c.id " +
-                "WHERE e.user_id = ?";
+                        "FROM expenses e " +
+                        "JOIN categories c ON e.category_id = c.id " +
+                        "WHERE e.user_id = ?";
 
         try (Connection conn = DBConnection.getConnection();
-            PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, userId);
 
