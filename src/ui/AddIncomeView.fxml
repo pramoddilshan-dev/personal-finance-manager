@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="ui.AddIncomeController"
+      spacing="15"
+      alignment="CENTER"
+      style="-fx-background-color:#f4f6f9;">
+
+    <padding>
+        <Insets top="25" right="25" bottom="25" left="25"/>
+    </padding>
+
+    <Label text="Add Income">
+        <font>
+            <Font size="22"/>
+        </font>
+    </Label>
+
+    <GridPane hgap="10" vgap="12">
+
+        <Label text="Amount:" GridPane.rowIndex="0"/>
+        <TextField fx:id="amountField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+        <Label text="Category ID:" GridPane.rowIndex="1"/>
+        <TextField fx:id="categoryIdField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+        <Label text="Note:" GridPane.rowIndex="2"/>
+        <TextField fx:id="noteField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+        <Label text="Date:" GridPane.rowIndex="3"/>
+        <DatePicker fx:id="datePicker" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+    </GridPane>
+
+    <HBox spacing="15">
+
+        <Button fx:id="saveButton"
+                text="Save"
+                style="-fx-background-color:#4CAF50; -fx-text-fill:white;"/>
+
+        <Button fx:id="cancelButton"
+                text="Cancel"
+                style="-fx-background-color:#f44336; -fx-text-fill:white;"/>
+
+    </HBox>
+
+</VBox>

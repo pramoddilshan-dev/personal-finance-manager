@@ -1,8 +1,12 @@
 package ui;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 import model.User;
 
 public class DashboardController {
@@ -39,7 +43,7 @@ public class DashboardController {
 
         welcomeLabel.setText("Welcome, " + user.getName() + "!");
 
-        // Temporary demo values
+        // Temporary values (until we connect repositories)
         incomeLabel.setText("$0");
         expenseLabel.setText("$0");
         balanceLabel.setText("$0");
@@ -48,12 +52,36 @@ public class DashboardController {
     @FXML
     public void initialize() {
 
-        addIncomeButton.setOnAction(e -> System.out.println("Add Income Clicked"));
+        addIncomeButton.setOnAction(e -> openAddIncomeWindow());
 
-        addExpenseButton.setOnAction(e -> System.out.println("Add Expense Clicked"));
+        addExpenseButton.setOnAction(e ->
+                System.out.println("Add Expense Clicked"));
 
-        viewReportsButton.setOnAction(e -> System.out.println("View Reports Clicked"));
+        viewReportsButton.setOnAction(e ->
+                System.out.println("View Reports Clicked"));
 
-        manageCategoriesButton.setOnAction(e -> System.out.println("Manage Categories Clicked"));
+        manageCategoriesButton.setOnAction(e ->
+                System.out.println("Manage Categories Clicked"));
+    }
+
+    private void openAddIncomeWindow() {
+
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/AddIncomeView.fxml"));
+            Parent root = loader.load();
+
+            AddIncomeController controller = loader.getController();
+            controller.setUser(loggedInUser);
+
+            Stage stage = new Stage();
+            stage.setTitle("Add Income");
+            stage.setScene(new Scene(root, 400, 320));
+            stage.centerOnScreen();
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
