@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 
 <VBox xmlns:fx="http://javafx.com/fxml"
-      fx:controller="ui.AddIncomeController"
+      fx:controller="ui.AddExpenseController"
       spacing="15"
       alignment="CENTER"
       style="-fx-background-color:#f4f6f9;">
@@ -15,7 +15,7 @@
         <Insets top="25" right="25" bottom="25" left="25"/>
     </padding>
 
-    <Label text="Add Income">
+    <Label text="Add Expense">
         <font>
             <Font size="22"/>
         </font>

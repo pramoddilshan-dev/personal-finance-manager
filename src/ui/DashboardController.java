@@ -54,8 +54,7 @@ public class DashboardController {
 
         addIncomeButton.setOnAction(e -> openAddIncomeWindow());
 
-        addExpenseButton.setOnAction(e ->
-                System.out.println("Add Expense Clicked"));
+        addExpenseButton.setOnAction(e -> openAddExpense());
 
         viewReportsButton.setOnAction(e ->
                 System.out.println("View Reports Clicked"));
@@ -78,6 +77,25 @@ public class DashboardController {
             stage.setTitle("Add Income");
             stage.setScene(new Scene(root, 400, 320));
             stage.centerOnScreen();
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void openAddExpense() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/AddExpenseView.fxml"));
+            Parent root = loader.load();
+
+            AddExpenseController controller = loader.getController();
+            controller.setUser(loggedInUser);
+
+            Stage stage = new Stage();
+            stage.setTitle("Add Expense");
+            stage.setScene(new Scene(root, 450, 400));
             stage.show();
 
         } catch (Exception e) {

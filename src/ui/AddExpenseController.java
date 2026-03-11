@@ -4,15 +4,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.Category;
-import model.Income;
+import model.Expense;
 import model.User;
 import repository.CategoryRepository;
-import repository.IncomeRepository;
+import repository.ExpenseRepository;
 
 import java.time.LocalDate;
 import java.util.List;
 
-public class AddIncomeController {
+public class AddExpenseController {
 
     @FXML
     private TextField amountField;
@@ -34,7 +34,7 @@ public class AddIncomeController {
 
     private User user;
 
-    private final IncomeRepository incomeRepo = new IncomeRepository();
+    private final ExpenseRepository expenseRepo = new ExpenseRepository();
     private final CategoryRepository categoryRepo = new CategoryRepository();
 
     public void setUser(User user) {
@@ -46,7 +46,7 @@ public class AddIncomeController {
 
         loadCategories();
 
-        saveButton.setOnAction(e -> saveIncome());
+        saveButton.setOnAction(e -> saveExpense());
 
         cancelButton.setOnAction(e -> {
             Stage stage = (Stage) cancelButton.getScene().getWindow();
@@ -56,12 +56,12 @@ public class AddIncomeController {
 
     private void loadCategories() {
 
-        List<Category> categories = categoryRepo.getCategoriesByType("income");
+        List<Category> categories = categoryRepo.getCategoriesByType("expense");
 
         categoryComboBox.getItems().addAll(categories);
     }
 
-    private void saveIncome() {
+    private void saveExpense() {
 
         try {
 
@@ -78,25 +78,25 @@ public class AddIncomeController {
                 return;
             }
 
-            Income income = new Income();
-            income.setUserId(user.getId());
-            income.setCategoryId(category.getId());
-            income.setAmount(amount);
-            income.setDate(date);
-            income.setNote(note);
+            Expense expense = new Expense();
+            expense.setUserId(user.getId());
+            expense.setCategoryId(category.getId());
+            expense.setAmount(amount);
+            expense.setDate(date);
+            expense.setNote(note);
 
-            boolean success = incomeRepo.addIncome(income);
+            boolean success = expenseRepo.addExpense(expense);
 
             if (success) {
 
-                showAlert("Success", "Income added successfully.");
+                showAlert("Success", "Expense added successfully.");
 
                 Stage stage = (Stage) saveButton.getScene().getWindow();
                 stage.close();
 
             } else {
 
-                showAlert("Error", "Failed to save income.");
+                showAlert("Error", "Failed to save expense.");
             }
 
         } catch (NumberFormatException e) {
