@@ -30,6 +30,9 @@ public class DashboardController {
     private Button addExpenseButton;
 
     @FXML
+    private Button viewTransactionsButton;
+
+    @FXML
     private Button viewReportsButton;
 
     @FXML
@@ -56,7 +59,9 @@ public class DashboardController {
 
         addExpenseButton.setOnAction(e -> openAddExpense());
 
-        viewReportsButton.setOnAction(e -> openTransactions());
+        viewTransactionsButton.setOnAction(e -> openTransactions());
+
+        viewReportsButton.setOnAction(e -> openReports());
 
         manageCategoriesButton.setOnAction(e ->
                 System.out.println("Manage Categories Clicked"));
@@ -115,6 +120,26 @@ public class DashboardController {
             Stage stage = new Stage();
             stage.setTitle("Transactions");
             stage.setScene(new Scene(root, 700, 500));
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void openReports() {
+
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/ReportsView.fxml"));
+            Parent root = loader.load();
+
+            ReportsController controller = loader.getController();
+            controller.setUser(loggedInUser);
+
+            Stage stage = new Stage();
+            stage.setTitle("Reports");
+            stage.setScene(new Scene(root, 900, 600));
             stage.show();
 
         } catch (Exception e) {

@@ -50,25 +50,39 @@
 
     <GridPane hgap="20" vgap="20" alignment="CENTER">
 
+        <!-- Row 0 -->
         <Button fx:id="addIncomeButton"
                 text="Add Income"
-                prefWidth="150" />
+                prefWidth="150"
+                GridPane.rowIndex="0"
+                GridPane.columnIndex="0"/>
 
         <Button fx:id="addExpenseButton"
                 text="Add Expense"
                 prefWidth="150"
-                GridPane.columnIndex="1" />
+                GridPane.rowIndex="0"
+                GridPane.columnIndex="1"/>
+
+        <!-- Row 1 -->
+        <Button fx:id="viewTransactionsButton"
+                text="Transactions"
+                prefWidth="150"
+                GridPane.rowIndex="1"
+                GridPane.columnIndex="0"/>
 
         <Button fx:id="viewReportsButton"
                 text="View Reports"
                 prefWidth="150"
-                GridPane.rowIndex="1" />
+                GridPane.rowIndex="1"
+                GridPane.columnIndex="1"/>
 
+        <!-- Row 2 -->
         <Button fx:id="manageCategoriesButton"
                 text="Manage Categories"
                 prefWidth="150"
-                GridPane.columnIndex="1"
-                GridPane.rowIndex="1" />
+                GridPane.rowIndex="2"
+                GridPane.columnIndex="0"
+                GridPane.columnSpan="2"/>
 
     </GridPane>
 

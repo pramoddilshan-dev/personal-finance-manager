@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="ui.ReportsController"
+      spacing="20"
+      alignment="CENTER"
+      style="-fx-background-color:#f4f6f9;">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Financial Reports">
+        <font>
+            <Font size="24"/>
+        </font>
+    </Label>
+
+    <!-- Summary Cards -->
+
+    <HBox spacing="20" alignment="CENTER">
+
+        <VBox spacing="5" alignment="CENTER"
+              style="-fx-background-color:white; -fx-padding:15;">
+
+            <Label text="Total Income"/>
+            <Label fx:id="incomeLabel"
+                   text="0"
+                   style="-fx-font-size:18; -fx-text-fill:green;"/>
+
+        </VBox>
+
+        <VBox spacing="5" alignment="CENTER"
+              style="-fx-background-color:white; -fx-padding:15;">
+
+            <Label text="Total Expense"/>
+            <Label fx:id="expenseLabel"
+                   text="0"
+                   style="-fx-font-size:18; -fx-text-fill:red;"/>
+
+        </VBox>
+
+        <VBox spacing="5" alignment="CENTER"
+              style="-fx-background-color:white; -fx-padding:15;">
+
+            <Label text="Balance"/>
+            <Label fx:id="balanceLabel"
+                   text="0"
+                   style="-fx-font-size:18; -fx-text-fill:#2196F3;"/>
+
+        </VBox>
+
+    </HBox>
+
+    <!-- Charts -->
+
+    <HBox spacing="20">
+
+        <PieChart fx:id="expensePieChart"
+                  title="Expenses Overview"
+                  prefWidth="350"/>
+
+        <BarChart fx:id="incomeExpenseChart"
+                  title="Income vs Expense"
+                  prefWidth="500">
+
+            <xAxis>
+                <CategoryAxis label="Date"/>
+            </xAxis>
+
+            <yAxis>
+                <NumberAxis label="Amount"/>
+            </yAxis>
+
+        </BarChart>
+
+    </HBox>
+
+    <Button fx:id="closeButton"
+            text="Close"
+            style="-fx-background-color:#f44336; -fx-text-fill:white;"/>
+
+</VBox>
