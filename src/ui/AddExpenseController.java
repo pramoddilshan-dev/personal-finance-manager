@@ -56,7 +56,7 @@ public class AddExpenseController {
 
     private void loadCategories() {
 
-        List<Category> categories = categoryRepo.getCategoriesByType("expense");
+        List<Category> categories = categoryRepo.getCategoriesByType("EXPENSE");
 
         categoryComboBox.getItems().addAll(categories);
     }

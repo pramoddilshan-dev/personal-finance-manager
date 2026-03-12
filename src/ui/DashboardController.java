@@ -63,8 +63,7 @@ public class DashboardController {
 
         viewReportsButton.setOnAction(e -> openReports());
 
-        manageCategoriesButton.setOnAction(e ->
-                System.out.println("Manage Categories Clicked"));
+        manageCategoriesButton.setOnAction(e -> openCategoryManagement());
     }
 
     private void openAddIncomeWindow() {
@@ -90,7 +89,9 @@ public class DashboardController {
 
     @FXML
     private void openAddExpense() {
+
         try {
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/AddExpenseView.fxml"));
             Parent root = loader.load();
 
@@ -140,6 +141,23 @@ public class DashboardController {
             Stage stage = new Stage();
             stage.setTitle("Reports");
             stage.setScene(new Scene(root, 900, 600));
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void openCategoryManagement() {
+
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/CategoryManagementView.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle("Manage Categories");
+            stage.setScene(new Scene(root, 450, 400));
             stage.show();
 
         } catch (Exception e) {

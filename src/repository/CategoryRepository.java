@@ -57,7 +57,7 @@ public class CategoryRepository {
         String sql = "SELECT * FROM categories WHERE type = ?";
 
         try (Connection conn = DBConnection.getConnection();
-            PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, type);
 
@@ -66,7 +66,6 @@ public class CategoryRepository {
             while (rs.next()) {
 
                 Category category = new Category();
-
                 category.setId(rs.getInt("id"));
                 category.setName(rs.getString("name"));
                 category.setType(rs.getString("type"));
@@ -108,4 +107,49 @@ public class CategoryRepository {
 
         return category;
     }
+
+    public List<Category> getAllCategories() {
+
+        List<Category> categories = new ArrayList<>();
+
+        String sql = "SELECT * FROM categories";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+
+                Category category = new Category();
+                category.setId(rs.getInt("id"));
+                category.setName(rs.getString("name"));
+
+                categories.add(category);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return categories;
+    }
+
+    public boolean deleteCategory(int id) {
+
+        String sql = "DELETE FROM categories WHERE id = ?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, id);
+
+            return stmt.executeUpdate() > 0;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
 }

@@ -56,7 +56,7 @@ public class AddIncomeController {
 
     private void loadCategories() {
 
-        List<Category> categories = categoryRepo.getCategoriesByType("income");
+        List<Category> categories = categoryRepo.getCategoriesByType("INCOME");
 
         categoryComboBox.getItems().addAll(categories);
     }

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="ui.CategoryManagementController"
+      spacing="15"
+      alignment="CENTER"
+      style="-fx-background-color:#f4f6f9;">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Manage Categories">
+        <font>
+            <Font size="22"/>
+        </font>
+    </Label>
+
+    <!-- Category Table -->
+
+    <TableView fx:id="categoryTable" prefWidth="450" prefHeight="250">
+
+        <columns>
+            <TableColumn fx:id="idColumn" text="ID" prefWidth="60"/>
+            <TableColumn fx:id="nameColumn" text="Category Name" prefWidth="220"/>
+            <TableColumn fx:id="typeColumn" text="Type" prefWidth="150"/>
+        </columns>
+
+    </TableView>
+
+    <!-- Add Category -->
+
+    <HBox spacing="10" alignment="CENTER">
+
+        <TextField fx:id="categoryNameField"
+                   promptText="Category name"
+                   prefWidth="160"/>
+
+        <ComboBox fx:id="typeComboBox"
+                  prefWidth="120"/>
+
+        <Button fx:id="addButton"
+                text="Add"
+                style="-fx-background-color:#4CAF50; -fx-text-fill:white;"/>
+
+    </HBox>
+
+    <!-- Actions -->
+
+    <HBox spacing="10">
+
+        <Button fx:id="deleteButton"
+                text="Delete Selected"
+                style="-fx-background-color:#f44336; -fx-text-fill:white;"/>
+
+        <Button fx:id="closeButton"
+                text="Close"/>
+
+    </HBox>
+
+</VBox>
