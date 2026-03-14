@@ -26,10 +26,12 @@
         <columns>
 
             <TableColumn fx:id="dateColumn" text="Date" prefWidth="120"/>
-            <TableColumn fx:id="typeColumn" text="Type" prefWidth="120"/>
+            <TableColumn fx:id="typeColumn" text="Type" prefWidth="100"/>
             <TableColumn fx:id="categoryColumn" text="Category" prefWidth="150"/>
-            <TableColumn fx:id="amountColumn" text="Amount" prefWidth="120"/>
+            <TableColumn fx:id="amountColumn" text="Amount" prefWidth="100"/>
             <TableColumn fx:id="noteColumn" text="Note" prefWidth="200"/>
+
+            <TableColumn fx:id="actionColumn" text="Actions" prefWidth="150"/>
 
         </columns>
 

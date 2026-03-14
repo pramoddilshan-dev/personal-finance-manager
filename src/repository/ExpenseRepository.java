@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
 
 public class ExpenseRepository {
 
@@ -127,5 +128,44 @@ public class ExpenseRepository {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean deleteExpense(int id) {
+
+        String sql = "DELETE FROM expenses WHERE id=?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, id);
+            return stmt.executeUpdate() > 0;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public boolean updateExpense(int id, double amount, int categoryId, LocalDate date, String note) {
+
+        String sql = "UPDATE expenses SET amount=?, category_id=?, date=?, note=? WHERE id=?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setDouble(1, amount);
+            stmt.setInt(2, categoryId);
+            stmt.setDate(3, java.sql.Date.valueOf(date));
+            stmt.setString(4, note);
+            stmt.setInt(5, id);
+
+            return stmt.executeUpdate() > 0;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 }

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="ui.EditTransactionController"
+      spacing="15"
+      alignment="CENTER"
+      style="-fx-background-color:#f4f6f9;">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Edit Transaction">
+        <font>
+            <Font size="20"/>
+        </font>
+    </Label>
+
+    <GridPane hgap="10" vgap="12">
+
+        <Label text="Amount:" GridPane.rowIndex="0"/>
+        <TextField fx:id="amountField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+        <Label text="Category:" GridPane.rowIndex="1"/>
+        <ComboBox fx:id="categoryComboBox" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+        <Label text="Note:" GridPane.rowIndex="2"/>
+        <TextField fx:id="noteField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+        <Label text="Date:" GridPane.rowIndex="3"/>
+        <DatePicker fx:id="datePicker" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+    </GridPane>
+
+    <HBox spacing="15">
+
+        <Button fx:id="saveButton"
+                text="Update"
+                style="-fx-background-color:#4CAF50; -fx-text-fill:white;"/>
+
+        <Button fx:id="cancelButton"
+                text="Cancel"
+                style="-fx-background-color:#f44336; -fx-text-fill:white;"/>
+
+    </HBox>
+
+</VBox>
